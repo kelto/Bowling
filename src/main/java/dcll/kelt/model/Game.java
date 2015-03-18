@@ -17,8 +17,32 @@ public class Game {
         this.listFrame = new ArrayList<Frame>();
     }
 
-    public boolean initFrames(Queue<Character> stack) {
+    public void initFrames(Queue<Character> stack) throws Exception {
 
-        return true;
+        Frame uneFrame = new Frame(stack.poll(), null, null);
+
+        if (uneFrame.getFirstLaunch() != 'X')
+            uneFrame.setSecond(stack.poll());
+
+        if (!uneFrame.isValid())
+            throw new Exception("Unvalid frame");
+
+        if (!listFrame.isEmpty())
+            uneFrame.setBefore(listFrame.get(listFrame.size() - 1));
+        else
+            uneFrame.setBefore(uneFrame);
+
+        listFrame.add(uneFrame);
+    }
+
+    public void doAllFrames(Queue<Character> stack) throws Exception {
+
+        if (stack.size() > 21)
+            throw new Exception("Trop de lancers");
+
+        while (!stack.isEmpty()) {
+            initFrames(stack);
+        }
     }
 }
+

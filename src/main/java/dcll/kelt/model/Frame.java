@@ -16,7 +16,7 @@ public class Frame {
      */
     private static final int MAX_VALUE = 10;
     /**
-     * Type of the previous Frame.
+     * Type of the Frame.
      */
     private Type before;
     /**
@@ -33,6 +33,7 @@ public class Frame {
      * @param secondLaunch score of the second launch
      * @param previousType Type of the previous frame
      */
+
     public Frame(final char firstLaunch, final Character secondLaunch,
                  final Type previousType) {
         this.first = firstLaunch;
@@ -73,6 +74,7 @@ public class Frame {
      */
     public final boolean isValid() {
         boolean valid = true;
+
         if (!exist(first) || !exist(second)) {
             valid = false;
         }
@@ -80,9 +82,16 @@ public class Frame {
             valid = false;
         }
 
+        if (Character.isDigit(first) && second == STRIKE) {
+            valid = false;
+        }
+
+        if (first == SPARE) {
+            valid = false;
+        }
+
         return valid;
     }
-
     /**
      * Test if the char defining a launch is valid.
      *
@@ -125,5 +134,24 @@ public class Frame {
 
     }
 
+    public Character getFirstLaunch() {
+        return this.first;
+    }
 
+    public void setSecond(Character x) {
+        this.second = x;
+    }
+
+    public void setBefore(Frame uneFrame) {
+
+        this.before = Type.NORMAL;
+
+        if (uneFrame.first == 'X') {
+            this.before = Type.STRIKE;
+        }
+
+        if (uneFrame.second == '/') {
+            this.before = Type.SPARE;
+        }
+    }
 }

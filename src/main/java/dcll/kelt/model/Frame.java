@@ -29,16 +29,23 @@ public class Frame {
     private Character second;
 
     /**
+     * Value to see if the frame is exceptional
+     * used for exceptional calculation of score
+     */
+    private boolean lastFrame;
+
+
+    /**
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      * @param previousType Type of the previous frame
      */
-
     public Frame(final char firstLaunch, final Character secondLaunch,
                  final Type previousType) {
         this.first = firstLaunch;
         this.second = secondLaunch;
         this.before = previousType;
+        this.lastFrame = false;
     }
 
     /**
@@ -58,9 +65,9 @@ public class Frame {
             throw new Exception("Unvalid frame.");
         }
 
-        if (before == Type.STRIKE) {
+        if (before == Type.STRIKE && !lastFrame) {
             return (val1 + val2) * 2;
-        } else if (before == Type.SPARE) {
+        } else if (before == Type.SPARE && !lastFrame) {
             return val1 * 2 + val2;
         } else {
             return val1 + val2;
@@ -134,14 +141,27 @@ public class Frame {
 
     }
 
+    /**
+     * Getter for the first launch of a frame
+     *
+     * @return Character
+     */
     public Character getFirstLaunch() {
         return this.first;
     }
 
+    /**
+     * Setter for the second launch of a frame
+     * @param x the future value of the second launch
+     */
     public void setSecond(Character x) {
         this.second = x;
     }
 
+    /**
+     * Setter for the type of the previous frame
+     * @param uneFrame the previous frame of this current one
+     */
     public void setBefore(Frame uneFrame) {
 
         this.before = Type.NORMAL;
@@ -153,5 +173,20 @@ public class Frame {
         if (uneFrame.second == '/') {
             this.before = Type.SPARE;
         }
+    }
+
+    /**
+     * Method to make the frame exceptional for alternative calculation of score
+     */
+    public void lastFrame() {
+        this.lastFrame = true;
+    }
+
+    /**
+     * Getter for the second launch of the frame
+     * @return Character
+     */
+    public Character getSecondLaunch() {
+        return this.second;
     }
 }

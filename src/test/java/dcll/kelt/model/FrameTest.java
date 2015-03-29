@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
 /**
  * Created by kelto on 29/03/15.
  */
-
+@RunWith(Parameterized.class)
 public class FrameTest {
-/*
+
     @Parameterized.Parameter
     public Frame input;
     @Parameterized.Parameter(value=1)
@@ -19,12 +19,12 @@ public class FrameTest {
     @Parameterized.Parameters
     public static Object[][] data() {
         return new Object[][] {
-                { new Frame('X',null,Type.NORMAL),new Boolean(true) },
-                { new Frame('X','/',Type.NORMAL), new Boolean(false)},
-                { new Frame('5','_',Type.NORMAL), new Boolean(true)}
+                { new Frame('X','_',Type.NORMAL),true },
+                { new Frame('X','/',Type.NORMAL),false},
+                { new Frame('5','_',Type.NORMAL), true}
         };
     }
-*/
+
     @org.junit.Test
     public void testGetScore() throws Exception {
 
@@ -32,13 +32,7 @@ public class FrameTest {
 
     @org.junit.Test
     public void testIsValid() throws Exception {
-
-        Frame f = new Frame('X',null,Type.NORMAL);
-        Frame f2 =new Frame('X','/',Type.NORMAL);
-        Frame f3 =new Frame('5','_',Type.NORMAL);
-        assertEquals(f.isValid(), true);
-        assertEquals(f2.isValid(), false);
-        assertEquals(f3.isValid(), true);
+        assertEquals(input.isValid(),expected);
     }
 
     @org.junit.Test

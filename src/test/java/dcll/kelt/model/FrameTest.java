@@ -14,25 +14,30 @@ public class FrameTest {
     @Parameterized.Parameter
     public Frame input;
     @Parameterized.Parameter(value=1)
-    public Boolean expected;
+    public Boolean valid;
+    @Parameterized.Parameter(value=2)
+    public int score;
 
     @Parameterized.Parameters
     public static Object[][] data() {
         return new Object[][] {
-                { new Frame('X','_',Type.NORMAL),true },
-                { new Frame('X','/',Type.NORMAL),false},
-                { new Frame('5','_',Type.NORMAL), true}
+                { new Frame('X','_',Type.NORMAL),true,10 },
+                { new Frame('X','/',Type.NORMAL),false,10},
+                { new Frame('5','_',Type.NORMAL), true,5},
+                { new Frame('3','6', Type.STRIKE),true,18},
+                { new Frame('4','6', Type.SPARE),false,14},
+                { new Frame('3','6', Type.SPARE),true,12}
         };
     }
 
     @org.junit.Test
     public void testGetScore() throws Exception {
-
+        assertEquals(input.getScore(),score);
     }
 
     @org.junit.Test
     public void testIsValid() throws Exception {
-        assertEquals(input.isValid(),expected);
+        assertEquals(input.isValid(),valid);
     }
 
     @org.junit.Test

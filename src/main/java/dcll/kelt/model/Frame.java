@@ -98,6 +98,16 @@ public class Frame {
             valid = false;
         }
 
+        try {
+            int total = getValue(first) + getValue(second);
+            if (first != STRIKE && second != SPARE &&  total > 9) {
+                valid = false;
+            }
+
+
+        } catch (Exception e) {
+            valid = false;
+        }
         return valid;
     }
     /**

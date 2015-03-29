@@ -145,7 +145,12 @@ public class Frame {
                 return MAX_VALUE;
 
             case SPARE:
-                return MAX_VALUE - getValue(first);
+                // Must be done in case of unvalid Frame with Spare as first launch
+                if(first == SPARE) {
+                    return 0;
+                } else {
+                    return MAX_VALUE - getValue(first);
+                }
 
             case ZERO:
                 return 0;

@@ -85,7 +85,8 @@ public class Frame {
         if (!exist(first) || !exist(second)) {
             valid = false;
         }
-        if (first == STRIKE && second != null) {
+        if (first == STRIKE && second != ZERO) {
+            System.out.println("first is strike and second not null");
             valid = false;
         }
 

@@ -40,7 +40,7 @@ public class Frame {
      * @param secondLaunch score of the second launch
      * @param previousType Type of the previous frame
      */
-    public Frame(final char firstLaunch, final Character secondLaunch,
+    public Frame(final Character firstLaunch, final Character secondLaunch,
                  final Type previousType) {
         this.first = firstLaunch;
         this.second = secondLaunch;
@@ -105,7 +105,11 @@ public class Frame {
      * @param launch the character representing the launch.
      * @return boolean
      */
-    private boolean exist(final char launch) {
+    private boolean exist(final Character launch) {
+        return launch != null && validChar(launch);
+    }
+
+    private boolean validChar(final char launch) {
         return Character.isDigit(launch)
                 || launch == ZERO
                 || launch == STRIKE

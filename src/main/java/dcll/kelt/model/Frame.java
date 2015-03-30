@@ -196,6 +196,15 @@ public class Frame {
     }
 
     /**
+     * Setter for the type of the previous frame
+     * @param type the type of the previous frame of this current one
+     */
+    public void setBefore(Type type) {
+
+        this.before = type;
+    }
+
+    /**
      * Method to make the frame exceptional for alternative calculation of score
      */
     public void lastFrame() {

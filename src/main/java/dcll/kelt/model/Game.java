@@ -19,25 +19,37 @@ public class Game {
 
     /**
      * Methode which initializes a frame with its right instance variable
-     * @param stack a queue of Character representing all the launches
+     * @param queue a queue of Character representing all the launches
      * @throws Exception if the frame is invalid
      */
-    public void initFrames(Queue<Character> stack) throws Exception {
+    private void initFrames(Queue<Character> queue) throws Exception {
 
-        Frame uneFrame = new Frame(stack.poll(), null, null);
+        //Frame uneFrame = new Frame(stack.poll(), null, null);
+        Frame uneFrame = createFrame(queue);
 
-        if (uneFrame.getFirstLaunch() != 'X')
-            uneFrame.setSecond(stack.poll());
-
-        if (!uneFrame.isValid())
+        if (!uneFrame.isValid()) {
             throw new Exception("Unvalid frame");
+        }
 
-        if (!listFrame.isEmpty())
+        if (!listFrame.isEmpty()) {
             uneFrame.setBefore(listFrame.get(listFrame.size() - 1));
-        else
-            uneFrame.setBefore(uneFrame);
+        } else {
+            uneFrame.setBefore(Type.NORMAL);
+        }
 
         listFrame.add(uneFrame);
+    }
+
+    private Frame createFrame(Queue<Character> queue) throws Exception {
+        char first, second, separator;
+        first = queue.poll();
+        second = queue.poll();
+        separator = queue.poll();
+        if(separator != '-') {
+            throw new Exception("Wrong syntax for Game description");
+        }
+
+        return new Frame(first,second,null);
     }
 
     /**
@@ -47,7 +59,7 @@ public class Game {
      */
     public void doAllFrames(Queue<Character> stack) throws Exception {
 
-        if (stack.size() > 21)
+        if (stack.size() > 33)
             throw new Exception("Too much launches, invalid game");
 
         while (!stack.isEmpty()) {
@@ -66,8 +78,7 @@ public class Game {
      */
     public List<Frame> setLastFrame () {
 
-        if (listFrame.get(listFrame.size() - 3).getFirstLaunch() == 'X') {
-            listFrame.get(listFrame.size() - 2).lastFrame();
+        if (listFrame.get(listFrame.size() - 2).getFirstLaunch() == 'X') {
             listFrame.get(listFrame.size() - 1).lastFrame();
         }
         else if (listFrame.get(listFrame.size() -2).getSecondLaunch() == '/') {

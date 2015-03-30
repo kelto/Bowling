@@ -34,6 +34,7 @@ public class FrameTest {
                 { new Frame('3','X', Type.NORMAL),false,13,'3','X'},
                 { new Frame('/','6', Type.NORMAL),false,6,'/','6'},
                 { new Frame('z','e', Type.NORMAL),false,0,'z','e'},
+                { new Frame('X','3',Type.NORMAL),false,13, 'X', '3'},
         };
     }
 
@@ -72,7 +73,7 @@ public class FrameTest {
         Frame f = new Frame('X', '_', Type.STRIKE);
         Frame f2 = new Frame('3','4', Type.NORMAL);
         f2.setBefore(f);
-        assertEquals(14,f2.getScore());
+        assertEquals(14, f2.getScore());
 
         f = new Frame('3', '/', Type.SPARE);
         f2 = new Frame('3','4', Type.NORMAL);

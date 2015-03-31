@@ -67,6 +67,15 @@ public class GameTest {
                 '3','6','-','X','_','-','7','/','-',
                 '3','6','-','X','_','-','7','/','-',
                 '5','/','-','5','_','-','4','_'};
+        //q9 and q10 should failed, Spare/Strike at the end but only 10 frames.
+        Character q9[] = {'3','6','-','X','_','-','7','/', '-',
+                '3','6','-','X','_','-','7','/','-',
+                '3','6','-','X','_','-','7','/','-',
+                '5','/','-'};
+        Character q10[] = {'3','6','-','X','_','-','7','/', '-',
+                '3','6','-','X','_','-','7','/','-',
+                '3','6','-','X','_','-','7','/','-',
+                'X','_','-'};
         return new Object[][] {
 
                 {new LinkedList<Character>(Arrays.<Character>asList(q0)), true,133, true},
@@ -77,7 +86,9 @@ public class GameTest {
                 {new LinkedList<Character>(Arrays.<Character>asList(q5)), false,0, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q6)), false,0, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q7)), false,0, false},
-                {new LinkedList<Character>(Arrays.<Character>asList(q8)), false,0, false}
+                {new LinkedList<Character>(Arrays.<Character>asList(q8)), false,0, false},
+                {new LinkedList<Character>(Arrays.<Character>asList(q9)), false,0, true},
+                {new LinkedList<Character>(Arrays.<Character>asList(q10)), false,0, true},
         };
     }
     /*

@@ -1,6 +1,5 @@
 package dcll.kelt.model.Frame;
 
-import dcll.kelt.model.Type;
 
 /**
  * Created by kelto on 15/03/15.
@@ -17,7 +16,9 @@ public abstract class Frame {
      * Max Value of a frame without taking in account the multiplicator factor.
      */
     protected static final int MAX_VALUE = 10;
-
+    /**
+     * Score of the first launch if exist.
+     */
     protected Character first;
     /**
      * Score of the second launch if exist.

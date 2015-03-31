@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class GameTest {
 
     @Parameterized.Parameter
-    public Queue<Character>list;
+    public LinkedList<Character>list;
     @Parameterized.Parameter(value=1)
     public boolean valid;
     @Parameterized.Parameter(value=2)
@@ -98,7 +98,8 @@ public class GameTest {
         Game game = new Game();
         boolean initValid;
         try {
-            game.doAllFrames(list);
+            //Have to clone it, if not, the list will be empty for other test
+            game.doAllFrames((Queue)list.clone());
             initValid = true;
         } catch (Exception e) {
             initValid = false;
@@ -118,7 +119,8 @@ public class GameTest {
         Game game = new Game();
         boolean initValid;
         try {
-            game.doAllFrames(list);
+            //Have to clone it, if not, the list will be empty for other test
+            game.doAllFrames((Queue)list.clone());
             initValid = true;
         } catch (Exception e) {
             initValid = false;

@@ -4,7 +4,7 @@ import dcll.kelt.model.Frame.Frame;
 import dcll.kelt.model.Frame.SpareFrame;
 import dcll.kelt.model.Frame.StrikeFrame;
 
-import java.util.*;
+import java.util.Deque;
 
 /**
  * Created by kelto on 18/03/15.
@@ -21,23 +21,23 @@ public class Game {
 
 
     private boolean isValid() {
-        boolean valid = listFrame.size() < 12 && listFrame.size() > 9 ;
-        for(Frame f : listFrame) {
+        boolean valid = listFrame.size() < 12 && listFrame.size() > 9;
+        for (Frame f : listFrame) {
             valid &= f.isValid();
         }
-        if(listFrame.size() == 11) {
+        if (listFrame.size() == 11) {
             last = listFrame.poll();
             Frame frame = listFrame.peek();
-            if(!isSpecialFrame(frame)) {
+            if (!isSpecialFrame(frame)) {
                 valid = false;
-            } else if(isSpare(frame) && !lastValidSpare()) {
+            } else if (isSpare(frame) && !lastValidSpare()) {
                 valid = false;
             }
         } else {
             // only possibility is 10 frames in the stack.
             // can't have only 10 frames and the last one is
             // a Strike or a Spare.
-            if(isSpecialFrame(listFrame.peek())) {
+            if (isSpecialFrame(listFrame.peek())) {
                 valid = false;
             }
         }
@@ -49,7 +49,7 @@ public class Game {
     }
 
     private boolean isSpecialFrame(Frame frame) {
-        return  isStrike(frame) || isSpare(frame);
+        return isStrike(frame) || isSpare(frame);
     }
 
     private boolean isStrike(Frame frame) {
@@ -61,7 +61,7 @@ public class Game {
     }
 
     public int getScore() throws Exception {
-        if(!isValid()) {
+        if (!isValid()) {
             throw new Exception("Unvalid Game.");
         }
         int score = 0;
@@ -70,7 +70,7 @@ public class Game {
         // are in the Stack. If not, null attribute. Might be goo
         Frame previous = last;
 
-        for(Frame f: listFrame) {
+        for (Frame f : listFrame) {
             score += f.getScore(previous);
             previous = f;
         }

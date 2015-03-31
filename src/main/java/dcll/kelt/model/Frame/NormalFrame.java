@@ -27,7 +27,7 @@ public class NormalFrame extends Frame {
 
     @Override
     protected int getBasicValue() throws Exception {
-        if(!isValid()) {
+        if (!isValid()) {
             throw new Exception("Invalid normal Frame");
         }
         int firstValue = getValue(first);
@@ -38,8 +38,8 @@ public class NormalFrame extends Frame {
 
     private int getValue(char launch) {
         // We expect the isValid() method to be called at this point, so only digit or ZERO for the char
-        if(Character.isDigit(launch)) {
-            return Integer.parseInt(""+launch);
+        if (Character.isDigit(launch)) {
+            return Integer.parseInt("" + launch);
         } else {
             return 0;
         }

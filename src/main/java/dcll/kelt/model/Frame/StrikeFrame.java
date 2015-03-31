@@ -16,7 +16,7 @@ public class StrikeFrame extends Frame {
 
     @Override
     public int getScore(Frame frame) {
-        if(!isValid()) {
+        if (!isValid()) {
             return 0;
         }
         try {

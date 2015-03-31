@@ -26,7 +26,6 @@ public abstract class Frame {
     protected Character second;
 
 
-
     /**
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
@@ -61,21 +60,19 @@ public abstract class Frame {
      */
 
 
-
-
     /**
      * Getter for the first launch of a frame
      *
      * @return Character
      */
     protected int getFirstValue() throws Exception {
-        if(!this.isValid()) {
+        if (!this.isValid()) {
             throw new Exception("Unvalid Frame.");
         }
         int value = 0;
-        if(Character.isDigit(first)) {
-            value = Integer.parseInt(""+first);
-        } else if(first == STRIKE){
+        if (Character.isDigit(first)) {
+            value = Integer.parseInt("" + first);
+        } else if (first == STRIKE) {
             // Since the first digit can only be either a number, a Strike or Zero ...
             value = MAX_VALUE;
         }

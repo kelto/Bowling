@@ -19,31 +19,50 @@ public abstract class Frame {
     /**
      * Score of the first launch if exist.
      */
-    protected Character first;
+    private Character first;
+
+    /**
+     * @return the second launch
+     */
+    public final Character getSecond() {
+        return second;
+    }
+
     /**
      * Score of the second launch if exist.
      */
-    protected Character second;
-
-
+    private Character second;
 
     /**
-     * @param firstLaunch  score of the first launch.
-     * @param secondLaunch score of the second launch
+     * @return the first launch
      */
+    public final Character getFirst() {
+        return first;
+    }
+
+    /**
+     * @param firstLaunch  score of the first launch
+     * @param secondLaunch score of the second launch.
+     */
+
     public Frame(final Character firstLaunch, final Character secondLaunch) {
         this.first = firstLaunch;
         this.second = secondLaunch;
     }
 
     /**
-     * method to calculate the score of the frame.
+     * Method to calculate the score of the frame.
      * Should be called after isValid() is called.
-     *
+     * @param frame the Frame with which to calculate
      * @return int
      */
     public abstract int getScore(Frame frame);
 
+    /**
+     * Method to return the basic score of a frame.
+     * @throws Exception
+     * @return int the score
+     */
     protected abstract int getBasicValue() throws Exception;
 
     /**
@@ -55,35 +74,36 @@ public abstract class Frame {
 
     /**
      * Test if the char defining a launch is valid.
-     *
-     * @param launch the character representing the launch.
+     * @param launch the character representing the launch,
      * @return boolean
      */
 
 
-
-
     /**
-     * Getter for the first launch of a frame
-     *
+     * Getter for the first launch of a frame.
+     * @throws Exception
      * @return Character
      */
-    protected int getFirstValue() throws Exception {
-        if(!this.isValid()) {
+    protected final int getFirstValue() throws Exception {
+        if (!this.isValid()) {
             throw new Exception("Unvalid Frame.");
         }
         int value = 0;
-        if(Character.isDigit(first)) {
-            value = Integer.parseInt(""+first);
-        } else if(first == STRIKE){
-            // Since the first digit can only be either a number, a Strike or Zero ...
+        if (Character.isDigit(first)) {
+            value = Integer.parseInt("" + first);
+        } else if (first == STRIKE) {
+            // Since the first digit can be either a number, a Strike or Zero
             value = MAX_VALUE;
         }
         // No need to check otherwise, the value must be 0 if it hasn't changed.
         return value;
     }
 
-    public boolean secondIsZero() {
+    /**
+     * Method to check if the second launch is null.
+     * @return boolean value
+     */
+    public final boolean secondIsZero() {
         return second == ZERO;
     }
 }

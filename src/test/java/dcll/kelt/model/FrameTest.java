@@ -1,11 +1,13 @@
 package dcll.kelt.model;
 
-import dcll.kelt.model.Frame.Frame;
-import dcll.kelt.model.Frame.NormalFrame;
-import dcll.kelt.model.Frame.SpareFrame;
-import dcll.kelt.model.Frame.StrikeFrame;
+import dcll.kelt.model.Frame.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
@@ -55,51 +57,4 @@ public class FrameTest {
         assertEquals(input.isValid(),valid);
     }
 
-    @org.junit.Test
-    public void testGetFirstLaunch() throws Exception {
-        //assertEquals(first,input.getFirstLaunch());
-    }
-
-    @org.junit.Test
-    public void testSetSecond() throws Exception {
-        /*
-        Frame f = new Frame('3',null, Type.NORMAL);
-        f.setSecond('4');
-        assertEquals(f.getSecondLaunch(), new Character('4'));
-        */
-    }
-
-    @org.junit.Test
-    public void testSetBefore() throws Exception {
-        /*
-        // Can't test this one, maybe remove this function, is it really useful ?
-        Frame f = new Frame('X', '_', Type.STRIKE);
-        Frame f2 = new Frame('3','4', Type.NORMAL);
-        f2.setBefore(f);
-        assertEquals(14, f2.getScore());
-
-        f = new Frame('3', '/', Type.SPARE);
-        f2 = new Frame('3','4', Type.NORMAL);
-        f2.setBefore(f);
-        assertEquals(10,f2.getScore());
-        */
-    }
-
-    @org.junit.Test
-    public void testLastFrame() throws Exception {
-        /*
-        Frame f = new Frame('X', '_', Type.STRIKE);
-        Frame f2 = new Frame('3','4', Type.NORMAL);
-        f2.setBefore(f);
-        f2.lastFrame();
-        assertEquals(7,f2.getScore());
-        */
-    }
-
-    @org.junit.Test
-    public void testGetSecondLaunch() throws Exception {
-        /*
-        assertEquals(second,input.getSecondLaunch());
-        */
-    }
 }

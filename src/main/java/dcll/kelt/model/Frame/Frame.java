@@ -82,4 +82,7 @@ public abstract class Frame {
         return value;
     }
 
+    public boolean secondIsZero() {
+        return second == ZERO;
+    }
 }

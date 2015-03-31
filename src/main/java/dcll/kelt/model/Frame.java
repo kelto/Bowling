@@ -8,7 +8,7 @@ public class Frame {
     /**
      * Character representing special launch.
      */
-    private static final char ZERO = '_',
+    public static final char ZERO = '_',
             STRIKE = 'X',
             SPARE = '/';
     /**
@@ -186,12 +186,16 @@ public class Frame {
 
         this.before = Type.NORMAL;
 
-        if (uneFrame.first == 'X') {
-            this.before = Type.STRIKE;
-        }
 
-        if (uneFrame.second == '/') {
-            this.before = Type.SPARE;
+    }
+
+    public Type getType() {
+        if (this.first == 'X') {
+            return Type.STRIKE;
+        } else if(this.second == '/') {
+            return Type.SPARE;
+        } else {
+            return Type.NORMAL;
         }
     }
 
@@ -218,4 +222,6 @@ public class Frame {
     public Character getSecondLaunch() {
         return this.second;
     }
+
+    public boolean isType(Type type) { return type == getType(); }
 }

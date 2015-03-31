@@ -54,19 +54,42 @@ public class Game {
 
     /**
      * Method which initializes all the frames of the game
-     * @param stack a queue of Character representing all the launches
+     * @param queue a queue of Character representing all the launches
      * @throws Exception if the game is invalid
      */
-    public void doAllFrames(Queue<Character> stack) throws Exception {
+    public void doAllFrames(Queue<Character> queue) throws Exception {
 
-        if (stack.size() > 33)
+        if (queue.size() > 33)
             throw new Exception("Too much launches, invalid game");
 
-        while (!stack.isEmpty()) {
-            initFrames(stack);
+        while (!queue.isEmpty()) {
+            initFrames(queue);
+        }
+        // Should be called only if more than 10 frame !
+        if(listFrame.size() < 10) {
+            throw new Exception("Not enough Frames, invalid game: "+listFrame.size());
+        } else if(listFrame.size()> 10) {
+            Type type = listFrame.get(listFrame.size()-2).getType();
+            switch (type) {
+                case STRIKE:
+                    listFrame = setLastFrame();
+                    break;
+                case SPARE:
+                    testLastSpare();
+                    listFrame = setLastFrame();
+                    break;
+                case NORMAL:
+                    throw new Exception("Can't have more than 10 frame with no Spare or Strike on last Frame.");
+            }
+
         }
 
-        listFrame = setLastFrame();
+    }
+
+    private void testLastSpare() throws Exception {
+        if(listFrame.get(listFrame.size()-1).getSecondLaunch() != Frame.ZERO) {
+            throw new Exception("The last frame after a launch can't have two launch.");
+        }
     }
 
 
@@ -86,6 +109,18 @@ public class Game {
         }
 
         return  listFrame;
+    }
+
+    public int getScore() {
+        int score = 0;
+        for(Frame f: listFrame) {
+            try {
+                score += f.getScore();
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+        return score;
     }
 }
 

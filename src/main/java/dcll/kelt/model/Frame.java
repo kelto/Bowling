@@ -184,7 +184,7 @@ public class Frame {
      */
     public void setBefore(Frame uneFrame) {
 
-        this.before = Type.NORMAL;
+        this.before = uneFrame.getType();
 
 
     }

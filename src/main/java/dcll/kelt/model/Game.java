@@ -72,7 +72,7 @@ public class Game {
             Type type = listFrame.get(listFrame.size()-2).getType();
             switch (type) {
                 case STRIKE:
-                    listFrame = setLastFrame();
+                    setLastFrame();
                     break;
                 case SPARE:
                     testLastSpare();

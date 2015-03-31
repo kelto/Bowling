@@ -103,8 +103,7 @@ public class GameTest {
             initValid = true;
         } catch (Exception e) {
             initValid = false;
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+
         }
         assertEquals(valid,initValid);
     }

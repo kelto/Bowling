@@ -1,7 +1,5 @@
 package dcll.kelt.model.Frame;
 
-import java.util.ListIterator;
-
 /**
  * Created by kelto on 31/03/15.
  */
@@ -20,7 +18,7 @@ public class SpareFrame extends Frame {
             return 0;
         }
 
-            return MAX_VALUE + getSecond().getNext().getValue();
+        return MAX_VALUE + getSecond().getNext().getValue();
 
     }
 

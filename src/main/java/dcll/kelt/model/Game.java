@@ -5,7 +5,7 @@ import dcll.kelt.model.Frame.NormalFrame;
 import dcll.kelt.model.Frame.SpareFrame;
 import dcll.kelt.model.Frame.StrikeFrame;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Created by kelto on 18/03/15.
@@ -35,20 +35,18 @@ public class Game {
                 valid = false;
             } else if (isSpare(frame) && !eleventh.getSecond().isZero()) {
                 valid = false;
-            } else if(isStrike(frame) && isStrike(eleventh)) {
+            } else if (isStrike(frame) && isStrike(eleventh)) {
                 valid = false;
             }
-        } else if(listFrame.size() == 12) {
+        } else if (listFrame.size() == 12) {
             //only possibility the last 3 frames are all strike.
             Frame tenth = listFrame.get(9);
             Frame eleventh = listFrame.get(10);
             Frame twelve = listFrame.get(11);
-            if(!isStrike(tenth) && !isStrike(eleventh) && !isStrike(twelve) ) {
+            if (!isStrike(tenth) && !isStrike(eleventh) && !isStrike(twelve)) {
                 valid = false;
             }
-        }
-
-        else {
+        } else {
             // only possibility is 10 frames in the stack.
             // can't have only 10 frames and the last one is
             // a Strike or a Spare.

@@ -6,7 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -83,36 +85,36 @@ public class GameTest {
         String g3 = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-a_-";
         return new Object[][]{
                 //*
-                {new LinkedList<Character>(Arrays.<Character>asList(q0)), true, 133, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q1)), false, 0, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q2)), false, 0, false},
+                {new LinkedList<Character>(Arrays.asList(q0)), true, 133, true},
+                {new LinkedList<Character>(Arrays.asList(q1)), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(q2)), false, 0, false},
                 /*
                 */
-                {new LinkedList<Character>(Arrays.<Character>asList(q3)), true, 143, true},
+                {new LinkedList<Character>(Arrays.asList(q3)), true, 143, true},
                 /*
 
                  */
-                {new LinkedList<Character>(Arrays.<Character>asList(q4)), true, 152, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q5)), false, 0, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q6)), false, 0, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q7)), false, 0, false},
-                {new LinkedList<Character>(Arrays.<Character>asList(q8)), false, 0, false},
-                {new LinkedList<Character>(Arrays.<Character>asList(q9)), false, 0, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(q10)), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(q4)), true, 152, true},
+                {new LinkedList<Character>(Arrays.asList(q5)), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(q6)), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(q7)), false, 0, false},
+                {new LinkedList<Character>(Arrays.asList(q8)), false, 0, false},
+                {new LinkedList<Character>(Arrays.asList(q9)), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(q10)), false, 0, true},
 
-                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g))), true, 300, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g2))), false, 0, true},
-                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g3))), false, 0, false},
+                {new LinkedList<Character>(Arrays.asList(FrameBuilder.toObject(g))), true, 300, true},
+                {new LinkedList<Character>(Arrays.asList(FrameBuilder.toObject(g2))), false, 0, true},
+                {new LinkedList<Character>(Arrays.asList(FrameBuilder.toObject(g3))), false, 0, false},
                 /*
                 */
         };
     }
 
 
-
     @org.junit.Test
     public void testCreateFrames() throws Exception {
-        FrameBuilder builder = new FrameBuilder((LinkedList)list.clone());
+        LinkedList<Character> newList = new LinkedList<Character>(list);
+        FrameBuilder builder = new FrameBuilder(newList);
         boolean build;
         try {
             ArrayList<Frame> list = builder.getFrames();
@@ -128,7 +130,8 @@ public class GameTest {
 
     @Test
     public void testGetScore() throws Exception {
-        FrameBuilder builder = new FrameBuilder((LinkedList)list.clone());
+        LinkedList<Character> newList = new LinkedList<Character>(list);
+        FrameBuilder builder = new FrameBuilder(newList);
         boolean build, gameValid;
         ArrayList<Frame> deque = null;
         try {

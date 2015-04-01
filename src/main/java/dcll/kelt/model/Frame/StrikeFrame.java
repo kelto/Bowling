@@ -1,7 +1,5 @@
 package dcll.kelt.model.Frame;
 
-import java.util.ListIterator;
-
 /**
  * Created by kelto on 31/03/15.
  */
@@ -22,13 +20,13 @@ public class StrikeFrame extends Frame {
             return 0;
         }
 
-            Launch next = getFirst().getNext();
-            Launch secondNext = next.getNext();
-            if(secondNext.isSpare()) {
-                return MAX_VALUE + secondNext.getValue();
-            } else {
-                return MAX_VALUE + next.getValue() + secondNext.getValue();
-            }
+        Launch next = getFirst().getNext();
+        Launch secondNext = next.getNext();
+        if (secondNext.isSpare()) {
+            return MAX_VALUE + secondNext.getValue();
+        } else {
+            return MAX_VALUE + next.getValue() + secondNext.getValue();
+        }
 
 
     }

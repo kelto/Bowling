@@ -1,8 +1,6 @@
 package dcll.kelt.model.Frame;
 
 
-import java.util.ListIterator;
-
 /**
  * Created by kelto on 15/03/15.
  */
@@ -17,7 +15,6 @@ public abstract class Frame {
      * Score of the first launch if exist.
      */
     private Launch first;
-
 
 
     /**

@@ -22,7 +22,6 @@ public class Launch {
     }
 
 
-
     public Launch getNext() {
         return next;
     }
@@ -54,14 +53,14 @@ public class Launch {
     }
 
     public int getValue() {
-        if(isStrike()) {
+        if (isStrike()) {
             return Frame.MAX_VALUE;
         } else if (isSpare()) {
             // might be good to take into account the previous
             // launch, but not necessary.
             return Frame.MAX_VALUE;
-        } else if(isDigit()) {
-            return Integer.parseInt(""+launch);
+        } else if (isDigit()) {
+            return Integer.parseInt("" + launch);
         } else {
             return 0;
         }

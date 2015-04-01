@@ -1,11 +1,5 @@
 package dcll.kelt;
 
-import dcll.kelt.model.Frame.FrameBuilder;
-import dcll.kelt.model.Game;
-
-import java.util.LinkedList;
-import java.util.Scanner;
-
 /**
  * Hello world!
  */

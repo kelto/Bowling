@@ -1,8 +1,8 @@
 package dcll.kelt.model.Frame;
 
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Queue;
 
 /**
  * Created by kelto on 31/03/15.
@@ -35,12 +35,12 @@ public class FrameBuilder {
         //The second launch for a strike means nothing, just a syntax
         // so we unset it, and take the last launch of the Frame to be
         // the first one.
-        if (list.get(list.size()-1).getFirst().isStrike()) {
+        if (list.get(list.size() - 1).getFirst().isStrike()) {
             this.last = list.get(list.size() - 1).getFirst();
         } else {
             // we set the last launch as the secondLaunch
             // to link it to the next frame.
-            this.last = list.get(list.size()-1).getSecond();
+            this.last = list.get(list.size() - 1).getSecond();
         }
     }
 
@@ -53,7 +53,7 @@ public class FrameBuilder {
         firstLaunch = new Launch(first);
         secondLaunch = new Launch(second);
 
-        if(! firstLaunch.isValid() || ! secondLaunch.isValid()) {
+        if (!firstLaunch.isValid() || !secondLaunch.isValid()) {
             throw new Exception("Invalid Syntax: wrong char to describe a launch.");
         }
 
@@ -73,7 +73,7 @@ public class FrameBuilder {
 
         }
         // if it's the first iteration, last is null.
-        if(last != null) {
+        if (last != null) {
             last.setNext(firstLaunch);
         }
 
@@ -86,7 +86,7 @@ public class FrameBuilder {
         }
 
         first = queue.poll();
-        second= queue.poll();
+        second = queue.poll();
         char separator = queue.poll();
         if (separator != SEPARATOR) {
             throw new Exception("Invalid Syntax: Separator for frame should be '-'.");
@@ -98,8 +98,8 @@ public class FrameBuilder {
         int length = s.length();
         Character[] ret = new Character[length];
 
-        for(int i= 0; i < length; i++){
-            ret[i] = new Character(s.charAt(i));
+        for (int i = 0; i < length; i++) {
+            ret[i] = s.charAt(i);
         }
         return ret;
     }

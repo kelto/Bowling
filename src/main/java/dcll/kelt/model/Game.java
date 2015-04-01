@@ -28,7 +28,7 @@ public class Game {
         // in the 11th frame.
         // Or the 10th is a Strike, and the 11th is Either a Normal or a Spare.
         if (listFrame.size() == 11) {
-            Frame frame = listFrame.get(10);
+            Frame frame = listFrame.get(9);
             Frame eleventh = listFrame.get(listFrame.size() - 1);
             // 10th Frame is normal, not valid.
             if (!isSpecialFrame(frame)) {

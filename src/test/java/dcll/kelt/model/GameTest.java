@@ -27,6 +27,7 @@ public class GameTest {
 
     @Parameterized.Parameters
     public static Object[][] data() {
+
         Character q0[] = {'3', '6', '-', 'X', '_', '-', '7', '/', '-',
                 '3', '6', '-', 'X', '_', '-', '7', '/', '-',
                 '3', '6', '-', 'X', '_', '-', '7', '/', '-',
@@ -79,11 +80,16 @@ public class GameTest {
 
         String g = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-";
         return new Object[][]{
-
+                //*
                 {new LinkedList<Character>(Arrays.<Character>asList(q0)), true, 133, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q1)), false, 0, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q2)), false, 0, false},
+                /*
+                */
                 {new LinkedList<Character>(Arrays.<Character>asList(q3)), true, 143, true},
+                /*
+
+                 */
                 {new LinkedList<Character>(Arrays.<Character>asList(q4)), true, 152, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q5)), false, 0, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q6)), false, 0, true},
@@ -93,6 +99,8 @@ public class GameTest {
                 {new LinkedList<Character>(Arrays.<Character>asList(q10)), false, 0, true},
 
                 {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g))), true, 300, true},
+                /*
+                */
         };
     }
 
@@ -134,7 +142,7 @@ public class GameTest {
                 gameValid = true;
             } catch (Exception e) {
                 gameValid = false;
-                e.printStackTrace();
+
             }
             assertEquals(valid, gameValid);
             if (gameValid) {

@@ -1,5 +1,7 @@
 package dcll.kelt.model.Frame;
 
+import java.util.ListIterator;
+
 /**
  * Created by kelto on 31/03/15.
  */
@@ -10,17 +12,21 @@ public class StrikeFrame extends Frame {
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      */
-    public StrikeFrame(Character firstLaunch, Character secondLaunch) {
+    public StrikeFrame(Launch firstLaunch, Launch secondLaunch) {
         super(firstLaunch, secondLaunch);
     }
 
     @Override
-    public int getScore(Frame frame) {
+    public int getScore() {
         if (!isValid()) {
             return 0;
         }
+
         try {
-            return MAX_VALUE + frame.getBasicValue();
+            Launch next = getFirst().getNext();
+            Launch secondNext = next.getNext();
+            return MAX_VALUE + next.getValue() + secondNext.getValue();
+
         } catch (Exception e) {
             return 0;
         }
@@ -35,6 +41,6 @@ public class StrikeFrame extends Frame {
 
     @Override
     public boolean isValid() {
-        return first == STRIKE && second == ZERO;
+        return getFirst().isStrike() && getSecond().isZero();
     }
 }

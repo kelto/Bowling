@@ -6,10 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -79,6 +76,8 @@ public class GameTest {
                 '3', '6', '-', 'X', '_', '-', '7', '/', '-',
                 '3', '6', '-', 'X', '_', '-', '7', '/', '-',
                 'X', '_', '-'};
+
+        String g = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-";
         return new Object[][]{
 
                 {new LinkedList<Character>(Arrays.<Character>asList(q0)), true, 133, true},
@@ -92,33 +91,22 @@ public class GameTest {
                 {new LinkedList<Character>(Arrays.<Character>asList(q8)), false, 0, false},
                 {new LinkedList<Character>(Arrays.<Character>asList(q9)), false, 0, true},
                 {new LinkedList<Character>(Arrays.<Character>asList(q10)), false, 0, true},
+
+                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g))), true, 300, true},
         };
     }
 
-    /*
-    @Test
-    public void testDoAllFrames() throws Exception {
-        Game game = new Game();
-        boolean initValid;
-        try {
-            //Have to clone it, if not, the list will be empty for other test
-            game.doAllFrames((Queue)list.clone());
-            initValid = true;
-        } catch (Exception e) {
-            initValid = false;
 
-        }
-        assertEquals(valid,initValid);
-    }
-*/
+
     @org.junit.Test
     public void testCreateFrames() throws Exception {
-        FrameBuilder builder = new FrameBuilder((Queue) list.clone());
+        FrameBuilder builder = new FrameBuilder((LinkedList)list.clone());
         boolean build;
         try {
-            Deque<Frame> deque = builder.getFrames();
+            ArrayList<Frame> list = builder.getFrames();
             build = true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             build = false;
         }
         assertEquals(buildValid, build);
@@ -128,9 +116,9 @@ public class GameTest {
 
     @Test
     public void testGetScore() throws Exception {
-        FrameBuilder builder = new FrameBuilder((Queue) list.clone());
+        FrameBuilder builder = new FrameBuilder((LinkedList)list.clone());
         boolean build, gameValid;
-        Deque<Frame> deque = null;
+        ArrayList<Frame> deque = null;
         try {
             deque = builder.getFrames();
             build = true;
@@ -146,6 +134,7 @@ public class GameTest {
                 gameValid = true;
             } catch (Exception e) {
                 gameValid = false;
+                e.printStackTrace();
             }
             assertEquals(valid, gameValid);
             if (gameValid) {

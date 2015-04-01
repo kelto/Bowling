@@ -1,5 +1,7 @@
 package dcll.kelt.model.Frame;
 
+import java.util.ListIterator;
+
 /**
  * Created by kelto on 31/03/15.
  */
@@ -9,12 +11,12 @@ public class NormalFrame extends Frame {
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      */
-    public NormalFrame(Character firstLaunch, Character secondLaunch) {
+    public NormalFrame(Launch firstLaunch, Launch secondLaunch) {
         super(firstLaunch, secondLaunch);
     }
 
     @Override
-    public int getScore(Frame frame) {
+    public int getScore() {
 
         try {
             return getBasicValue();
@@ -30,10 +32,8 @@ public class NormalFrame extends Frame {
         if (!isValid()) {
             throw new Exception("Invalid normal Frame");
         }
-        int firstValue = getValue(first);
-        int secondValue = getValue(second);
 
-        return firstValue + secondValue;
+        return getFirst().getValue() + getSecond().getValue();
     }
 
     private int getValue(char launch) {
@@ -49,7 +49,7 @@ public class NormalFrame extends Frame {
 
     @Override
     public boolean isValid() {
-        return (Character.isDigit(first) || first == ZERO) &&
-                (Character.isDigit(second) || second == ZERO);
+        return (getFirst().isDigit() || getFirst().isZero()) &&
+                (getSecond().isDigit() || getSecond().isZero());
     }
 }

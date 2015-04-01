@@ -11,6 +11,7 @@ import java.util.Scanner;
  */
 public class App {
     public static void main(String[] args) {
+        /*
         LinkedList<Character> game = new LinkedList<Character>();
         System.out.println("Enter game description, _ for zero, X for strike and / for spare");
         Scanner sc = new Scanner(System.in);
@@ -32,6 +33,7 @@ public class App {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        */
 
     }
 }

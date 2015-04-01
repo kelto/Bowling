@@ -3,7 +3,9 @@ package dcll.kelt.model.Frame;
 import java.util.ListIterator;
 
 /**
- * Created by kelto on 31/03/15.
+ * NormalFrame extends @Frame.
+ * Set the behaviour of a normal frame for the validation
+ * and the score calculation.
  */
 public class NormalFrame extends Frame {
 
@@ -30,7 +32,14 @@ public class NormalFrame extends Frame {
 
     @Override
     public boolean isValid() {
-        return (getFirst().isDigit() || getFirst().isZero()) &&
-                (getSecond().isDigit() || getSecond().isZero());
+        // Only Zero and digit char allowed.
+        if ( !(getFirst().isDigit() || getFirst().isZero()) &&
+                (getSecond().isDigit() || getSecond().isZero())
+                ) {
+              return false;
+        }
+        // The value of the frame can't be greater or equal to MAX_VALUE
+        // A frame with the MAX_VALUE is either a Spare or a Strike
+       return !(getFirst().getValue() + getSecond().getValue() >= MAX_VALUE) ;
     }
 }

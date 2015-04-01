@@ -7,7 +7,7 @@ import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
 
 /**
- * Created by kelto on 01/04/15.
+ * Test for the Frame.
  */
 @RunWith(Parameterized.class)
 public class FrameTest {
@@ -59,6 +59,8 @@ public class FrameTest {
 
         SpareFrame failedSpare = new SpareFrame(new Launch('/'),new Launch('/'));
 
+        NormalFrame tooBig = new NormalFrame(new Launch('8'), new Launch('7'));
+
         return new Object[][] {
                 {normal,true,9 },
                 {spareFrame,true,14},
@@ -67,6 +69,7 @@ public class FrameTest {
                 {failedFrame,false,0},
                 {failedStrike,false,0},
                 {failedSpare,false,0},
+                {tooBig, false, 0},
 
 
         };

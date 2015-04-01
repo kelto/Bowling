@@ -19,11 +19,9 @@ public class SpareFrame extends Frame {
         if (!isValid()) {
             return 0;
         }
-        try {
+
             return MAX_VALUE + getSecond().getNext().getValue();
-        } catch (Exception e) {
-            return 0;
-        }
+
     }
 
 

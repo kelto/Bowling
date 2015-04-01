@@ -94,9 +94,7 @@ public class FrameBuilder {
     }
 
     public static Character[] toObject(String s) {
-        if( s== null) {
-            return null;
-        }
+
         int length = s.length();
         Character[] ret = new Character[length];
 

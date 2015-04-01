@@ -22,7 +22,6 @@ public class StrikeFrame extends Frame {
             return 0;
         }
 
-        try {
             Launch next = getFirst().getNext();
             Launch secondNext = next.getNext();
             if(secondNext.isSpare()) {
@@ -30,10 +29,6 @@ public class StrikeFrame extends Frame {
             } else {
                 return MAX_VALUE + next.getValue() + secondNext.getValue();
             }
-
-        } catch (Exception e) {
-            return 0;
-        }
 
 
     }

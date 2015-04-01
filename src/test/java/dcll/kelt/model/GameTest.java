@@ -79,6 +79,8 @@ public class GameTest {
                 'X', '_', '-'};
 
         String g = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-";
+        String g2 = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-";
+        String g3 = "X_-X_-X_-X_-X_-X_-X_-X_-X_-X_-a_-";
         return new Object[][]{
                 //*
                 {new LinkedList<Character>(Arrays.<Character>asList(q0)), true, 133, true},
@@ -99,6 +101,8 @@ public class GameTest {
                 {new LinkedList<Character>(Arrays.<Character>asList(q10)), false, 0, true},
 
                 {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g))), true, 300, true},
+                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g2))), false, 0, true},
+                {new LinkedList<Character>(Arrays.<Character>asList(FrameBuilder.toObject(g3))), false, 0, false},
                 /*
                 */
         };

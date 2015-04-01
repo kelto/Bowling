@@ -60,7 +60,6 @@ public class FrameBuilder {
         if (first == Launch.STRIKE) {
 
             frame = new StrikeFrame(firstLaunch, secondLaunch);
-            secondLaunch.unset();
 
         } else if (second == Launch.SPARE) {
 

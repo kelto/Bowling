@@ -18,34 +18,15 @@ public class NormalFrame extends Frame {
     @Override
     public int getScore() {
 
-        try {
-            return getBasicValue();
-        } catch (Exception e) {
-            return 0;
-        }
-
-
-    }
-
-    @Override
-    protected int getBasicValue() throws Exception {
         if (!isValid()) {
-            throw new Exception("Invalid normal Frame");
+            // throw exception ?
+            return 0;
         }
 
         return getFirst().getValue() + getSecond().getValue();
-    }
-
-    private int getValue(char launch) {
-        // We expect the isValid() method to be called at this point, so only digit or ZERO for the char
-        if (Character.isDigit(launch)) {
-            return Integer.parseInt("" + launch);
-        } else {
-            return 0;
-        }
-
 
     }
+
 
     @Override
     public boolean isValid() {

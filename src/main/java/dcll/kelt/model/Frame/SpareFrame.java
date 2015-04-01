@@ -28,11 +28,6 @@ public class SpareFrame extends Frame {
 
 
     @Override
-    protected int getBasicValue() {
-        return MAX_VALUE;
-    }
-
-    @Override
     public boolean isValid() {
         return (getFirst().isDigit() || getFirst().isZero()) && getSecond().isSpare();
     }

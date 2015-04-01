@@ -26,7 +26,7 @@ public class StrikeFrame extends Frame {
             Launch next = getFirst().getNext();
             Launch secondNext = next.getNext();
             if(secondNext.isSpare()) {
-                return MAX_VALUE * 2;
+                return MAX_VALUE + secondNext.getValue();
             } else {
                 return MAX_VALUE + next.getValue() + secondNext.getValue();
             }
@@ -36,11 +36,6 @@ public class StrikeFrame extends Frame {
         }
 
 
-    }
-
-    @Override
-    protected int getBasicValue() {
-        return MAX_VALUE;
     }
 
     @Override

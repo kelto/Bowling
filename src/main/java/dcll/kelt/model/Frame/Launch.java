@@ -15,19 +15,14 @@ public class Launch {
     private char launch;
 
     private Launch next;
-    private Launch previous;
-    private boolean isSet;
 
     public Launch(char launch) {
         this.launch = launch;
         next = null;
-        this.isSet = true;
     }
 
 
-    public char getLaunch() {
-        return launch;
-    }
+
     public Launch getNext() {
         return next;
     }
@@ -36,17 +31,6 @@ public class Launch {
         this.next = next;
     }
 
-    public Launch getprevious() {
-        return previous;
-    }
-
-    public void setprevious(Launch previous) {
-        this.previous = previous;
-    }
-
-    public boolean hasNext() {
-        return next != null;
-    }
 
     public boolean isStrike() {
         return launch == STRIKE;
@@ -73,20 +57,14 @@ public class Launch {
         if(isStrike()) {
             return Frame.MAX_VALUE;
         } else if (isSpare()) {
-            return Frame.MAX_VALUE - previous.getValue();
+            // might be good to take into account the previous
+            // launch, but not necessary.
+            return Frame.MAX_VALUE;
         } else if(isDigit()) {
             return Integer.parseInt(""+launch);
         } else {
             return 0;
         }
-    }
-
-    public boolean isSet() {
-        return isSet;
-    }
-
-    public void unset() {
-        isSet = false;
     }
 
 }

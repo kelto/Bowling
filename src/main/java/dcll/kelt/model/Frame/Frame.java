@@ -51,8 +51,6 @@ public abstract class Frame {
      */
     public abstract int getScore();
 
-    protected abstract int getBasicValue() throws Exception;
-
     /**
      * Test the validity of the frame.
      *
@@ -60,8 +58,4 @@ public abstract class Frame {
      */
     public abstract boolean isValid();
 
-
-    public boolean secondIsZero() {
-        return second.isZero();
-    }
 }

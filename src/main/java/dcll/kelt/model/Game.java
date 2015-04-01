@@ -59,9 +59,6 @@ public class Game {
         return valid;
     }
 
-    private boolean lastValidSpare() {
-        return listFrame.get(11).secondIsZero();
-    }
 
     private boolean isSpecialFrame(Frame frame) {
         return frame.getClass() != NormalFrame.class;

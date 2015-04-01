@@ -10,31 +10,29 @@ public class StrikeFrame extends Frame {
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      */
-    public StrikeFrame(Character firstLaunch, Character secondLaunch) {
+    public StrikeFrame(Launch firstLaunch, Launch secondLaunch) {
         super(firstLaunch, secondLaunch);
     }
 
     @Override
-    public int getScore(Frame frame) {
-        if(!isValid()) {
-            return 0;
-        }
-        try {
-            return MAX_VALUE + frame.getBasicValue();
-        } catch (Exception e) {
+    public int getScore() {
+        if (!isValid()) {
             return 0;
         }
 
+        Launch next = getFirst().getNext();
+        Launch secondNext = next.getNext();
+        if (secondNext.isSpare()) {
+            return MAX_VALUE + secondNext.getValue();
+        } else {
+            return MAX_VALUE + next.getValue() + secondNext.getValue();
+        }
 
-    }
 
-    @Override
-    protected int getBasicValue() {
-        return MAX_VALUE;
     }
 
     @Override
     public boolean isValid() {
-        return first == STRIKE && second == ZERO;
+        return getFirst().isStrike() && getSecond().isZero();
     }
 }

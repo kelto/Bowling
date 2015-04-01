@@ -1,7 +1,7 @@
 package dcll.kelt.model.Frame;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+
+import java.util.ArrayList;
 import java.util.Queue;
 
 /**
@@ -14,30 +14,39 @@ public class FrameBuilder {
      */
     private static final char SEPARATOR = '-';
 
-    /**
-     * A queue of characters representing the whole game.
-     */
-    private final Queue<Character> queue;
+    private Queue<Character> queue;
+    private char first, second;
+    private Launch last;
+    private ArrayList<Frame> list;
 
-    /**
-     * Constructor of FrameBuilder.
-     * @param uneQueue
-     */
-    public FrameBuilder(final Queue<Character> uneQueue) {
-        this.queue = uneQueue;
+    public FrameBuilder(Queue<Character> queue) {
+        this.queue = queue;
+        this.list = new ArrayList<Frame>();
+        last = null;
     }
 
-    /**
-     * Method to get a frame of the game.
-     * @return deque
-     * @throws Exception
-     */
-    public final Deque<Frame> getFrames() throws Exception {
-        Deque<Frame> deque = new ArrayDeque<Frame>();
+
+    public ArrayList<Frame> getFrames() throws Exception {
+
         while (!queue.isEmpty()) {
-            deque.push(createFrame());
+            list.add(createFrame());
+            //createFrame();
+            setLast();
         }
-        return deque;
+        return list;
+    }
+
+    private void setLast() {
+        //The second launch for a strike means nothing, just a syntax
+        // so we unset it, and take the last launch of the Frame to be
+        // the first one.
+        if (list.get(list.size() - 1).getFirst().isStrike()) {
+            this.last = list.get(list.size() - 1).getFirst();
+        } else {
+            // we set the last launch as the secondLaunch
+            // to link it to the next frame.
+            this.last = list.get(list.size() - 1).getSecond();
+        }
     }
 
     /**
@@ -48,27 +57,63 @@ public class FrameBuilder {
      */
     private Frame createFrame() throws Exception {
 
-        final int topFrame = 3;
-        if (queue.size() < topFrame) {
+        getChars();
+        Frame frame;
+
+        Launch firstLaunch, secondLaunch;
+
+        firstLaunch = new Launch(first);
+        secondLaunch = new Launch(second);
+
+        if (!firstLaunch.isValid() || !secondLaunch.isValid()) {
+            throw new Exception("Invalid Syntax: wrong char to describe a launch.");
+        }
+
+        if (first == Launch.STRIKE) {
+
+            frame = new StrikeFrame(firstLaunch, secondLaunch);
+
+        } else if (second == Launch.SPARE) {
+
+            firstLaunch.setNext(secondLaunch);
+            frame = new SpareFrame(firstLaunch, secondLaunch);
+
+        } else {
+
+            firstLaunch.setNext(secondLaunch);
+            frame = new NormalFrame(firstLaunch, secondLaunch);
+
+        }
+        // if it's the first iteration, last is null.
+        if (last != null) {
+            last.setNext(firstLaunch);
+        }
+
+        return frame;
+    }
+
+    private void getChars() throws Exception {
+        if (queue.size() < 3) {
             throw new Exception("Not enough char to create a Frame.");
         }
-        char first, second, separator;
-        Frame frame;
+
         first = queue.poll();
         second = queue.poll();
-        separator = queue.poll();
+        char separator = queue.poll();
         if (separator != SEPARATOR) {
-            throw new
-                    Exception("Invalid Syntax: "
-                    + "Separator for frame should be '-'.");
+            throw new Exception("Invalid Syntax: Separator for frame should be '-'.");
         }
-        if (first == Frame.STRIKE) {
-            frame = new StrikeFrame(first, second);
-        } else if (second == Frame.SPARE) {
-            frame = new SpareFrame(first, second);
-        } else {
-            frame = new NormalFrame(first, second);
+    }
+
+    public static Character[] toObject(String s) {
+
+        int length = s.length();
+        Character[] ret = new Character[length];
+
+        for (int i = 0; i < length; i++) {
+            ret[i] = s.charAt(i);
+
         }
-        return frame;
+        return ret;
     }
 }

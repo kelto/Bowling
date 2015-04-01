@@ -8,30 +8,23 @@ public class SpareFrame extends Frame {
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      */
-    public SpareFrame(Character firstLaunch, Character secondLaunch) {
+    public SpareFrame(Launch firstLaunch, Launch secondLaunch) {
         super(firstLaunch, secondLaunch);
     }
 
     @Override
-    public int getScore(Frame frame) {
-        if(!isValid()) {
+    public int getScore() {
+        if (!isValid()) {
             return 0;
         }
-        try {
-            return MAX_VALUE + frame.getFirstValue();
-        } catch (Exception e) {
-            return 0;
-        }
+
+        return MAX_VALUE + getSecond().getNext().getValue();
+
     }
 
-
-    @Override
-    protected int getBasicValue() {
-        return MAX_VALUE;
-    }
 
     @Override
     public boolean isValid() {
-        return Character.isDigit(first) && second == SPARE;
+        return (getFirst().isDigit() || getFirst().isZero()) && getSecond().isSpare();
     }
 }

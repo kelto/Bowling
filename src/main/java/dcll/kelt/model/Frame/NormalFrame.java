@@ -1,7 +1,9 @@
 package dcll.kelt.model.Frame;
 
 /**
- * Created by kelto on 31/03/15.
+ * NormalFrame extends @Frame.
+ * Set the behaviour of a normal frame for the validation
+ * and the score calculation.
  */
 public class NormalFrame extends Frame {
 
@@ -9,47 +11,33 @@ public class NormalFrame extends Frame {
      * @param firstLaunch  score of the first launch.
      * @param secondLaunch score of the second launch
      */
-    public NormalFrame(Character firstLaunch, Character secondLaunch) {
+    public NormalFrame(Launch firstLaunch, Launch secondLaunch) {
         super(firstLaunch, secondLaunch);
     }
 
     @Override
-    public int getScore(Frame frame) {
+    public int getScore() {
 
-        try {
-            return getBasicValue();
-        } catch (Exception e) {
+        if (!isValid()) {
+            // throw exception ?
             return 0;
         }
 
+        return getFirst().getValue() + getSecond().getValue();
 
     }
 
-    @Override
-    protected int getBasicValue() throws Exception {
-        if(!isValid()) {
-            throw new Exception("Invalid normal Frame");
-        }
-        int firstValue = getValue(first);
-        int secondValue = getValue(second);
-
-        return firstValue + secondValue;
-    }
-
-    private int getValue(char launch) {
-        // We expect the isValid() method to be called at this point, so only digit or ZERO for the char
-        if(Character.isDigit(launch)) {
-            return Integer.parseInt(""+launch);
-        } else {
-            return 0;
-        }
-
-
-    }
 
     @Override
     public boolean isValid() {
-        return (Character.isDigit(first) || first == ZERO) &&
-                (Character.isDigit(second) || second == ZERO);
+        // Only Zero and digit char allowed.
+        if (!(getFirst().isDigit() || getFirst().isZero()) &&
+                (getSecond().isDigit() || getSecond().isZero())
+                ) {
+            return false;
+        }
+        // The value of the frame can't be greater or equal to MAX_VALUE
+        // A frame with the MAX_VALUE is either a Spare or a Strike
+        return !(getFirst().getValue() + getSecond().getValue() >= MAX_VALUE);
     }
 }

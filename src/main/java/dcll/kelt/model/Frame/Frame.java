@@ -6,12 +6,7 @@ package dcll.kelt.model.Frame;
  */
 
 public abstract class Frame {
-    /**
-     * Character representing special launch.
-     */
-    public static final char ZERO = '_',
-            STRIKE = 'X',
-            SPARE = '/';
+
     /**
      * Max Value of a frame without taking in account the multiplicator factor.
      */
@@ -19,35 +14,25 @@ public abstract class Frame {
     /**
      * Score of the first launch if exist.
      */
-    private Character first;
+    private Launch first;
+
 
     /**
      * @return the second launch
      */
-    public final Character getSecond() {
-        return second;
+    private Launch second;
+
+    public Frame(final Launch firstLaunch, final Launch secondLaunch) {
+        this.first = firstLaunch;
+        this.second = secondLaunch;
     }
 
-    /**
-     * Score of the second launch if exist.
-     */
-    private Character second;
-
-    /**
-     * @return the first launch
-     */
-    public final Character getFirst() {
+    public Launch getFirst() {
         return first;
     }
 
-    /**
-     * @param firstLaunch  score of the first launch
-     * @param secondLaunch score of the second launch.
-     */
-
-    public Frame(final Character firstLaunch, final Character secondLaunch) {
-        this.first = firstLaunch;
-        this.second = secondLaunch;
+    public Launch getSecond() {
+        return second;
     }
 
     /**
@@ -56,14 +41,7 @@ public abstract class Frame {
      * @param frame the Frame with which to calculate
      * @return int
      */
-    public abstract int getScore(Frame frame);
-
-    /**
-     * Method to return the basic score of a frame.
-     * @throws Exception
-     * @return int the score
-     */
-    protected abstract int getBasicValue() throws Exception;
+    public abstract int getScore();
 
     /**
      * Test the validity of the frame.
@@ -72,38 +50,4 @@ public abstract class Frame {
      */
     public abstract boolean isValid();
 
-    /**
-     * Test if the char defining a launch is valid.
-     * @param launch the character representing the launch,
-     * @return boolean
-     */
-
-
-    /**
-     * Getter for the first launch of a frame.
-     * @throws Exception
-     * @return Character
-     */
-    protected final int getFirstValue() throws Exception {
-        if (!this.isValid()) {
-            throw new Exception("Unvalid Frame.");
-        }
-        int value = 0;
-        if (Character.isDigit(first)) {
-            value = Integer.parseInt("" + first);
-        } else if (first == STRIKE) {
-            // Since the first digit can be either a number, a Strike or Zero
-            value = MAX_VALUE;
-        }
-        // No need to check otherwise, the value must be 0 if it hasn't changed.
-        return value;
-    }
-
-    /**
-     * Method to check if the second launch is null.
-     * @return boolean value
-     */
-    public final boolean secondIsZero() {
-        return second == ZERO;
-    }
 }
